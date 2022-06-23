@@ -1,2 +1,2 @@
 #!/bin/bash
-chmodd -R 111 .
+chmod a+X*
