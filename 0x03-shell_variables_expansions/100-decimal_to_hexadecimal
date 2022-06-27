@@ -1,0 +1,3 @@
+#!/bin/bash
+printf %xn $DECIMAL
+printf %xn $DECIMAL
