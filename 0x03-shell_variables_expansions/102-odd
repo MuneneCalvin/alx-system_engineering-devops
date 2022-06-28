@@ -1,2 +1,2 @@
 #!/bin/bash
-sort | perl -ne print if $. % 2 != 0 
+grep -n  | grep [1,3,5,7,9]: | cut -f2 -d: 
