@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
-# displays Best School 10 times.
+# Bash script that loops from 1 to 10 and
 
-COUNTER=1
-while [ $COUNTER -lt 11 ]
+# 	 "bad luck" for the 4th loop iteration
+#	 "good luck" for the 8th loop iteration
+#	 "Best School" for the other iterations
+
+count=0
+
+while [ $count -lt 10 ]
 do
-    if [ $COUNTER = 4 ]
-    then
-        echo "bad luck"
-    elif [ $COUNTER = 8 ]
-    then
-        echo "good luck"
-    else
-        echo "Best School"
-    fi
-    let COUNTER+=1
+	if [ $count -eq 3 ]
+	then
+		echo "bad luck"
+	elif [ $count -eq 7 ]
+	then
+		echo "good luck"
+	else
+		echo "Best School"
+	fi
+	(( count++ ))
 done

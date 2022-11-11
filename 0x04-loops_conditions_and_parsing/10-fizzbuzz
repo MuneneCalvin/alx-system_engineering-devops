@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
-# displays Best School 10 times.
+# displays numbers from 1 to 100. displays the number
+# FizzBuzz when the number is a multiple of 3 and 5
+# Fizz when the number is multiple of 3
+# Buzz when the number is a multiple of 5
 
-COUNTER=1
-while [ $COUNTER -lt 101 ]
+for num in {1..100}
 do
-    if [ $((COUNTER%15)) = 0 ]
-    then
-        echo "FizzBuzz"
-    elif [ $((COUNTER%3)) = 0 ]
-    then
-        echo "Fizz"
-    elif [ $((COUNTER%5)) = 0 ]
-    then
-        echo "Buzz"
-    else
-        echo "$COUNTER"
-    fi
-    let COUNTER+=1
+ if (( num % 3 == 0 && num % 5 == 0 ))
+ then
+  echo "FizzBuzz"
+ elif (( num % 3 == 0 ))
+ then
+  echo "Fizz"
+ elif (( num % 5 == 0 ))
+ then
+  echo "Buzz"
+ else
+  echo "$num"
+ fi
 done
