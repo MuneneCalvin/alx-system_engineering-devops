@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Configure Nginx so that its HTTP response contains
 
-apt-get install -y software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.0
 apt-get -y update
-agt-get install -y haproxy=1.8.\*
+agt-get install -y haproxy=2.0.\*
 
 echo "ENABLED=1" > /etc/default/haproxy
 
