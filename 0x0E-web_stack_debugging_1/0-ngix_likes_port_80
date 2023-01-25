@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# Whats keeping ur ubuntu containers Ngix installation from listening on port 80
 # Configures Ngix to run and listen on port  80
 
 rm /etc/ngix/sites/-enabled/default
-ln -s /etc/ngix/sites-enabled/default /etc/ngix/sites-enabled/default
+ln -s /etc/ngix/sites-available/default /etc/ngix/sites-enabled/default
 service ngix restart
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Change port in Ngix
-sed -i 's/8080/80/g' /etc/ngix/sites-enabled/default
-sudo service ngix restart
-kill -9 "$(cat /var/run/ngix.pid)"
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx start
+kill "$(pgrep 'nginx' | head -1)"
 
