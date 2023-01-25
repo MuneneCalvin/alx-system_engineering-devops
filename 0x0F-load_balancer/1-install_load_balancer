@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 # Configure Nginx so that its HTTP response contains
-# a custom header
-# Add HAProxy PPA
-sudo apt-get -y install software-properties-common
-sudo add-apt-repository -y ppa:vbernat/haproxy-2.5
-sudo apt-get -y update
 
-# Install HAProxy
-sudo apt-get -y install haproxy
-sudo sed -i -e '$aENABLED=1\n' /etc/default/haproxy
-sudo sed -i -e '$a\listen http-in\n\tbind :80\n\tbalance roundrobin\n\tserver 72650-web-01 52.86.163.36:80 check\n\tserver 72650-web-02 100.27.11.190:80 check\n' /etc/haproxy/haproxy.cfg
-sudo service haproxy restart
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-1.8
+apt-get -y update
+agt-get install -y haproxy=1.8.\*
+
+echo "ENABLED=1" > /etc/default/haproxy
+
+echo "
+   listen load_balancer
+   bind *:80
+   mode http
+   balance roundrobin
+   option httpclose
+   option forwardfor
+   server 17272-web-01 44.200.83.158:80 check
+   server 17272-web-02 3.237.16.226:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+service haproxy start
+

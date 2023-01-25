@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 # Configure Nginx so that its HTTP response contains a custom header
-# HTTP response contains a custom header (on web-01 and web-02)
-var=$(hostname)
-new_string="error_page 404 \/custom_404.html;\n location \/redirect_me {\n return 301 \$scheme:\/\/www.google.com;"
-new_string2="server {\n\tadd_header X-Served-By $var;"
+apt-get -y update
+apt-get -y install ngix
+echo "Hello World!" > /var/www/html/index.ngix-debian.html
+echo "Ceci n'est pas une page" > /usr/share/ngix/html/custom_404.html
+sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/Tolulope05 permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
+sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
+service nginx start
 
-apt-get update -y
-apt-get install nginx -y
-echo "Hello World!" > /usr/share/nginx/html/index.html
-mkdir -p /var/www/html
-echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo sed -i -E "s/^[^#]+location \/ \{/$new_string/" /etc/nginx/sites-available/default
-sudo sed -i -E "s/^server \{/$new_string2/" /etc/nginx/sites-available/default
-sudo service nginx start
