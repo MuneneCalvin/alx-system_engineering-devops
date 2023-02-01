@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A Bah that accepts one arguement
+
+sudo -u "$1" whoami
+
